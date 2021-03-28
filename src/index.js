@@ -1,14 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import { createLogger } from "redux-logger";
 import "./index.css";
 import App from "./containers/App";
 import registerServiceWorker from "./registerServiceWorker";
 import { searchRobots } from "./reducers";
 import "tachyons";
 
-const store = createStore(searchRobots);
+const logger = createLogger();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  searchRobots,
+  composeEnhancers(applyMiddleware(logger))
+);
 
 ReactDOM.render(
   <Provider store={store}>
