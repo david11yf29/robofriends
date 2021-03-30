@@ -6,6 +6,19 @@ import MainPage from "../components/MainPage";
 
 import "./App.css";
 
+export interface IRobot {
+  name: string;
+  id: number;
+  email: string;
+}
+
+export interface IAppProps {}
+
+export interface IAppState {
+  robots: Array<IRobot>;
+  searchfield: string;
+}
+
 const mapStateToProps = (state) => {
   return {
     searchField: state.searchRobots.searchField,
@@ -21,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-class App extends Component {
+class App extends Component<IAppProps, IAppState> {
   render() {
     return <MainPage {...this.props} />;
   }
